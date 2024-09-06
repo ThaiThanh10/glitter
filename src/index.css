@@ -19,6 +19,52 @@
 .oxanium {
   font-family: "Oxanium", system-ui;
 }
+@layer components {
+  .bgGradient {
+    @apply bg-gradient-to-b from-[#A04AF5] to-[#430E56];
+  }
+  .flexCenter {
+    @apply flex justify-center items-center;
+  }
+}
+
 .bgBanner {
   background: url("/images/landing.png") no-repeat center center;
+}
+
+.box {
+  clip-path: polygon(15% 0, 80.5% 0%, 100% 100%, 11% 100%, 0 44%, 0 44%, 9% 40%, 17% 22%);
+}
+.gallery {
+  display: flex;
+  gap: 12px;
+}
+
+.gallery > img {
+  flex: 1;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  object-fit: cover;
+  overflow: hidden;
+  /* transform: skewX(7deg); */
+  /* width: 400px; */
+  /* height: auto; */
+  max-height: 400px;
+  aspect-ratio: 4/6;
+  filter: grayscale(0);
+}
+.gallery > img:hover {
+  flex: 2 0 0%;
+}
+.gallery:hover > img:not(:hover) {
+  filter: grayscale(1);
+}
+.glass {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.31);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  /* border: 1px solid rgba(255, 255, 255, 0.48); */
 }

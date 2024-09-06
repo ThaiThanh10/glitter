@@ -33,6 +33,7 @@ export default {
 
             "2xl": { min: "1201px", max: "1440px" },
         },
+
         extend: {},
     },
     plugins: [],
