@@ -18,9 +18,6 @@ export default {
         fontFamily: {
             oxanium: ["Oxanium"],
         },
-        test: {
-            padding: "20px",
-        },
         screens: {
             xs: { min: "200px", max: "480px" },
             sm: { min: "481px", max: "576px" },

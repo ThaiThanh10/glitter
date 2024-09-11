@@ -1,22 +1,24 @@
 import { useState } from "react"
 import "./App.css"
-import { Footer, Header } from "./components"
+import { Footer, Header, Reveal, } from "./components"
 
 export const Banner = () => {
   return (
     <section className="bgBanner flex justify-center items-center  flex-col pb-[10%] ">
-      <img
-        src="/images/Group 12.png"
-        alt=""
-      />
-      <div className="flex flex-col justify-center items-center">
-        <h2 className="text-[38px] font-medium ">Comprehensive Web3 GTM Solutions</h2>
-        <input
-          className="text-[20px] rounded-[10px] glass py-[25px] pl-9 text-[#fff] w-[70%] "
-          placeholder="Enter Your Email..."
-          type="text"
+      <Reveal>
+        <img
+          src="/images/Group 12.png"
+          alt=""
         />
-      </div>
+        <div className="flex flex-col justify-center items-center">
+          <h2 className="text-[38px] font-medium ">Comprehensive Web3 GTM Solutions</h2>
+          <input
+            className="text-[20px] rounded-[10px] glass py-[25px] pl-9 text-[#fff] w-[60%] "
+            placeholder="Enter Your Email..."
+            type="text"
+          />
+        </div>
+      </Reveal>
     </section>
   )
 }
