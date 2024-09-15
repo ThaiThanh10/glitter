@@ -28,28 +28,28 @@ const Footer = () => {
                 <div className="max-w-[40%] w-[80%] ">
                     <h2 className="text-[44px] font-black">CONTACT US</h2>
                     <div className="mt-[20px] mb-[52px] flex items-center gap-x-4 ">
-                        <button className="px-3 py-2 bg-gradient-to-b from-[#752292] to-[#B978D0] rounded-[10px] skew-x-[8deg] border-[2px] border-[#752292] ">
+                        <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
                             <img
                                 className="-skew-x-[8deg] w-[58px] aspect-[1] "
                                 src="/images/X.svg"
                                 alt=""
                             />
                         </button>
-                        <button className="px-3 py-2 bg-gradient-to-b from-[#752292] to-[#B978D0] rounded-[10px] skew-x-[8deg] border-[2px] border-[#752292] ">
+                        <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
                             <img
                                 className="-skew-x-[8deg] w-[58px] aspect-[1] "
                                 src="/images/telegram.svg"
                                 alt=""
                             />
                         </button>
-                        <button className="px-3 py-2 bg-gradient-to-b from-[#752292] to-[#B978D0] rounded-[10px] skew-x-[8deg] border-[2px] border-[#752292] ">
+                        <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
                             <img
                                 className="-skew-x-[8deg] w-[58px] aspect-[1] "
                                 src="/images/mail.svg"
                                 alt=""
                             />
                         </button>
-                        <button className="px-3 py-2 bg-gradient-to-b from-[#752292] to-[#B978D0] rounded-[10px] skew-x-[8deg] border-[2px] border-[#752292] ">
+                        <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
                             <img
                                 className="-skew-x-[8deg] w-[58px] aspect-[1] "
                                 src="/images/phone.svg"

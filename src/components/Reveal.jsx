@@ -1,13 +1,25 @@
-import React from "react"
-import { motion } from "framer-motion"
-const Reveal = ({ children }) => {
+import React, { useEffect, useRef } from "react"
+import { motion, useAnimation, useInView } from "framer-motion"
+const Reveal = ({ children, delay = 0.3 }) => {
+    const ref = useRef(null)
+    const isInView = useInView(ref, {
+        once: true
+    })
+    const mainControls = useAnimation()
+    useEffect(() => {
+
+        if (isInView) {
+            console.log('🚀isInView---->', isInView);
+            mainControls.start("visible")
+        }
+    }, [isInView])
     return (
-        <div>
+        <div ref={ref}>
             <motion.div
                 variants={{
                     hidden: {
                         opacity: 0,
-                        y: 100,
+                        y: 130,
                     },
                     visible: {
                         opacity: 1,
@@ -15,10 +27,10 @@ const Reveal = ({ children }) => {
                     },
                 }}
                 initial="hidden"
-                animate="visible"
+                animate={mainControls}
                 transition={{
-                    duration: 0.7,
-                    // delay: 0.2,
+                    duration: 0.9,
+                    delay: delay,
                 }}
             >
                 {children}
