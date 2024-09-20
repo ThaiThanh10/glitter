@@ -7,9 +7,7 @@ const Reveal = ({ children, delay = 0.3 }) => {
     })
     const mainControls = useAnimation()
     useEffect(() => {
-
         if (isInView) {
-            console.log('🚀isInView---->', isInView);
             mainControls.start("visible")
         }
     }, [isInView])

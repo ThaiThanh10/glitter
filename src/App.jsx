@@ -1,32 +1,65 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import "./App.css"
 import { Footer, Header, Reveal } from "./components"
-import { Carousel } from "antd"
+import { Carousel, Modal } from "antd"
+import { useWindowSize } from "usehooks-ts"
+import emailjs from "@emailjs/browser"
 
-export const Banner = () => {
+export const Banner = ({ openModal }) => {
   return (
-    <section className="bgBanner flex justify-center items-center  flex-col pb-[10%] ">
+    <section className="bgBanner flex justify-center items-center px-3 flex-col pb-[10%] xs:pt-[10%] ">
       <Reveal>
         <img
           src="/images/Group 12.png"
           alt=""
         />
         <div className="flex flex-col justify-center items-center">
-          <h2 className="text-[38px] font-medium ">Comprehensive Web3 GTM Solutions</h2>
-          <input
-            className="text-[20px] rounded-[10px] glass py-[25px] pl-9 text-[#fff] w-[60%] "
-            placeholder="Enter Your Email..."
-            type="text"
-          />
+          <h2 className="text-[38px] text-center font-medium xs:text-[28px] sm:text-[32px] md:text-[34px] ">
+            Comprehensive Web3 GTM Solutions
+          </h2>
+          <div className="w-[50%] relative xs:w-full sm:w-full md:w-[80%] lg:w-[70%] ">
+            {" "}
+            <input
+              className="text-[20px] rounded-[10px] glass py-[25px] pl-9 text-[#fff] w-full mt-4 xs:py-4 "
+              placeholder="Enter Your Email..."
+              type="text"
+            />{" "}
+            <div className="absolute xs:relative sm:relative xs:mt-4 xs:w-full sm:mt-6 sm:mx-auto sm:right-0 right-[2%] top-[26%] flex justify-center items-center  w-max">
+              <button
+                onClick={openModal}
+                className="text-[28px]  font-medium p-[8px_20px] rounded-[10px] cursor-pointer bg-gradient-to-b from-[#A04AF5] to-[#430E56] hover:scale-105 transition-all duration-200 ease "
+              >
+                Contact US
+              </button>
+            </div>
+          </div>
         </div>
       </Reveal>
     </section>
   )
 }
 export const Market = () => {
+  const { width } = useWindowSize()
+  const data = [
+    {
+      img: "/images/setting.png",
+      title: "CREATE YOUR GTM PLAN",
+      text: "Work with us to create custom strategy aligned with your product and timeline, leveraging your teams resources",
+    },
+    {
+      img: "/images/research.png",
+      title: "ESTABLISH YOUR STRATEGY",
+      text: "Create a GTM plan based on your timeline and goals",
+    },
+    {
+      img: "/images/team.png",
+      title: "BUILD YOUR TEAM & EXECUTE",
+      text: "Equip the existing team with the resources to execute and support recruitment of resources to fill gaps",
+    },
+  ]
   return (
     <section
-      className={` mt-[80px] overflow-hidden object-contain bg-[left_top_1rem] pb-[150px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
+      className={` mt-[80px] overflow-hidden object-contain bg-[left_top_1rem] pb-[130px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
     >
       <div className=" flexCenter overflow-hidden  relative w-screen stripes ">
         <div className=" container mx-0 bg-gradient-to-t bgGradient w-full block skew-x-[40deg]   ">
@@ -35,62 +68,36 @@ export const Market = () => {
           </h2>
         </div>
       </div>
-      <div className="container ">
-        <h3 className="text-[40px] font-medium my-[50px] ">
+      <div className="container px-0 ">
+        <h3 className="text-[40px] font-medium my-[50px] px-4 xs:text-[34px] ">
           Avoid the pitfalls of past project and leverage Web3 successfully
         </h3>
         <Reveal>
-          <div className="flex justify-center">
-            <div className="max-w-[30%] relative  ">
-              <img
-                className="float-left absolute top-[-10%] left-[-10%]  z-10 "
-                src="/images/setting.png"
-                alt=""
-              />
-              <div className="bg-gradient-to-r from-[#A73333] to-[#6A41C2] box  opacity-80 max-w-[100%] px-[72px] py-3   ">
-                <h4 className="text-[24px] font-extrabold  mx-auto mb-2 max-w-[210px] ">
-                  CREATE YOUR GTM PLAN
-                </h4>
-                <p className="text-[20px] max-w-[270px] ">
-                  Work with us to create custom strategy aligned with your product
-                  and timeline, leveraging your teams resources
-                </p>
+          <div className={`" flex justify-around flex-wrap gap-10 px-5 "`}>
+            {data.map((item, i) => (
+              <div
+                key={i}
+                className={`" max-w-[30%] relative skew-x-[10deg] xs:skew-x-[0deg] ${width < 1300 && "max-w-full"
+                  } "`}
+              >
+                <img
+                  className="float-left absolute top-[-14%] left-[-10%] -skew-x-[10deg] xs:-skew-x-[0deg] z-10 bg-[#000] rounded-full aspect-[1] max-w-[145px] xs:max-w-[130px] p-3 "
+                  src={item.img}
+                  alt=""
+                />
+                <div className="bg-gradient-to-r from-[#A73333] to-[#6A41C2]  min-h-[245px] opacity-80 max-w-[100%] px-[72px] py-3 xs:p-7  ">
+                  <h4 className="text-[24px] font-extrabold   ml-[17%] xs:ml-[32%] mb-2 max-w-[210px] -skew-x-[10deg] xs:-skew-x-[0deg] ">
+                    {item.title}
+                  </h4>
+                  <p className="text-[20px] max-w-[270px] ml-[7%] -skew-x-[10deg] xs:-skew-x-[0deg] ">
+                    {item.text}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="max-w-[30%] relative  ">
-              <img
-                className="float-left absolute top-[-10%] left-[-10%]  z-10 "
-                src="/images/research.png"
-                alt=""
-              />
-              <div className="bg-gradient-to-r from-[#A73333] to-[#6A41C2] box  opacity-80 max-w-[100%] px-[72px] pt-3  pb-[82px] ">
-                <h4 className="text-[24px] font-extrabold  mx-auto mb-2 max-w-[210px] ">
-                  ESTABLISH YOUR STRATEGY
-                </h4>
-                <p className="text-[20px] max-w-[270px] pt-6 ">
-                  Create a GTM plan based on your timeline and goals
-                </p>
-              </div>
-            </div>
-            <div className="max-w-[30%] relative  ">
-              <img
-                className="float-left absolute top-[-10%] left-[-10%]  z-10 "
-                src="/images/team.png"
-                alt=""
-              />
-              <div className="bg-gradient-to-r from-[#A73333] to-[#6A41C2] box  opacity-80 max-w-[100%] px-[72px] pt-3 pb-[42px]  ">
-                <h4 className="text-[24px] font-extrabold  mx-auto mb-2 max-w-[210px] ">
-                  BUILD YOUR TEAM & EXECUTE
-                </h4>
-                <p className="text-[20px] max-w-[270px] ">
-                  Equip the existing team with the resources to execute and
-                  support recruitment of resources to fill gaps
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </Reveal>
-        <div className="flex justify-evenly items-center -mt-3 relative z-10 ">
+        {/* <div className="flex justify-evenly items-center -mt-3 relative z-10 ">
           <img
             src="/images/Frame 3.png"
             alt=""
@@ -99,16 +106,50 @@ export const Market = () => {
             src="/images/Frame 3.png"
             alt=""
           />
-        </div>
+        </div> */}
       </div>
     </section>
   )
 }
-
-export const Solutions = () => {
+const Solutions = () => {
+  const [current, setCurrent] = useState({
+    img: "/images/Rectangle 46.png",
+    desc: ["Planing for Success", "Token Launch Strategy", "Resource Planing"],
+  })
+  const { width } = useWindowSize()
+  const data = [
+    {
+      btn: "Strategic Planing",
+      data: {
+        img: "/images/Rectangle 46.png",
+        desc: ["Planing for Success", "Token Launch Strategy", "Resource Planing"],
+      },
+    },
+    {
+      btn: "Reputation & Community Building",
+      data: {
+        img: "/images/reputation.png",
+        desc: ["Demand Generation", "Community Retention"],
+      },
+    },
+    {
+      btn: "Partnerships & Networking",
+      data: {
+        img: "/images/Rectangle 47.png",
+        desc: ["Partner Introductions", "Vendor Introductions"],
+      },
+    },
+    {
+      btn: "Execution & Growth",
+      data: {
+        img: "/images/Rectangle 48.png",
+        desc: ["Marketing & Campaign Structure", "Building a Team"],
+      },
+    },
+  ]
   return (
     <section
-      className={`  overflow-hidden object-contain bg-[left_top_1rem] pb-[150px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
+      className={`  overflow-hidden object-contain bg-[left_top_1rem] pb-[120px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
     >
       <div className=" flexCenter overflow-hidden  relative w-screen stripes ">
         <div className=" container mx-0 bg-gradient-to-t bgGradient w-full block skew-x-[40deg]   ">
@@ -117,59 +158,54 @@ export const Solutions = () => {
           </h2>
         </div>
       </div>
-      <div className="container my-[50px] flex items-center justify-around ">
-        <div className="max-w-[40%]">
+      <div
+        className={`" container my-[50px] flex items-center justify-around px-3 gap-x-10 ${width < 1140 && "flex-col gap-10"
+          } "`}
+      >
+        <div className="max-w-[40%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full ">
           <Reveal>
             <div>
-              <div className="  bg-gradient-to-t bgGradient w-full block -skew-x-[40deg]  rounded-[12px] my-4  ">
-                <h2 className="text-[28px] font-extrabold text-center px-3 py-4 skew-x-[40deg]">
-                  Strategic Planing
-                </h2>
-              </div>
-              <div className="  bg-gradient-to-t bgGradient w-full block -skew-x-[40deg]  rounded-[12px] my-4  ">
-                <h2 className="text-[28px] font-extrabold text-center px-3 py-4 skew-x-[40deg]">
-                  Reputation & Community Building
-                </h2>
-              </div>
-              <div className="  bg-gradient-to-t bgGradient w-full block -skew-x-[40deg]  rounded-[12px] my-4  ">
-                <h2 className="text-[28px] font-extrabold text-center px-3 py-4 skew-x-[40deg]">
-                  Partnerships & Networking
-                </h2>
-              </div>
-              <div className="  bg-gradient-to-t bgGradient w-full block -skew-x-[40deg]  rounded-[12px] my-4  ">
-                <h2 className="text-[28px] font-extrabold text-center px-3 py-4 skew-x-[40deg]">
-                  Execution & Growth
-                </h2>
-              </div>
+              {data.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => setCurrent(item.data)}
+                  className=" cursor-pointer bg-gradient-to-t bgGradient w-full block -skew-x-[20deg] px-3 rounded-[12px] my-6  "
+                >
+                  <h2 className="text-[28px] font-extrabold text-center  py-4 skew-x-[20deg]">
+                    {item.btn}
+                  </h2>
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>
-        <div className="max-w-[55%]">
+        <div className="max-w-[55%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full xl:max-w-full">
           <Reveal>
-            <div className=" flexCenter gap-x-8 rounded-[22px]  bg-gradient-to-b from-[#655AAC] to-[#383066] p-5 -skew-x-[15deg] ">
-              <div className="max-w-[30%] overflow-hidden w-[350px] aspect-[0.6] bg-center bg-no-repeat rounded-[20px] ">
+            <div
+              className={`" flexCenter gap-x-8 rounded-[22px]  bg-gradient-to-b from-[#655AAC] to-[#383066] p-5 -skew-x-[10deg] xs:skew-x-0 md:-skew-x-[6deg] lg:-skew-x-[7deg] sm:-skew-x-[4deg] ${width < 900 && " flex-col "
+                } "`}
+            >
+              <div className="max-w-[30%] overflow-hidden w-[350px]  aspect-[0.6] bg-center bg-no-repeat rounded-[20px] xs:max-w-full sm:max-w-full md:max-w-[50%] lg:max-w-[50%]   ">
                 <img
-                  className=" scale-[1.7] mt-[10%]  "
-                  src="/images/Rectangle 46.png"
+                  className=" scale-[1] w-[350px] aspect-[0.6] rounded-[22px] "
+                  src={current.img}
                   alt=""
                 />{" "}
               </div>
-              <div className="flex flex-col gap-y-6 items-center justify-center w-full py-10 ">
-                <div className=" text-center  bg-gradient-to-b from-[#444] to-[#222] w-full block -skew-x-[25deg]  rounded-[12px]   ">
-                  <h2 className="text-[26px] font-extrabold  py-3 skew-x-[30deg]">
-                    Planing for Success
-                  </h2>
-                </div>
-                <div className=" text-center  bg-gradient-to-b from-[#444] to-[#222] w-full block -skew-x-[25deg]  rounded-[12px]   ">
-                  <h2 className="text-[26px] font-extrabold  py-3 skew-x-[30deg]">
-                    Token Launch Strategy
-                  </h2>
-                </div>
-                <div className=" text-center  bg-gradient-to-b from-[#444] to-[#222] w-full block -skew-x-[25deg]  rounded-[12px]   ">
-                  <h2 className="text-[26px] font-extrabold  py-3 skew-x-[30deg]">
-                    Resource Planing
-                  </h2>
-                </div>
+              <div
+                className={`" flex flex-col gap-y-6 items-center justify-center w-full py-10 px-3 ${width < 900 && "flex-col "
+                  } "`}
+              >
+                {current.desc.map((item, i) => (
+                  <div
+                    key={i}
+                    className=" text-center  bg-gradient-to-b from-[#444] to-[#222] w-full block -skew-x-[20deg]  rounded-[12px]   "
+                  >
+                    <h2 className="text-[26px] font-extrabold  py-3 skew-x-[20deg]">
+                      {item}
+                    </h2>
+                  </div>
+                ))}
               </div>
             </div>
           </Reveal>
@@ -179,27 +215,140 @@ export const Solutions = () => {
   )
 }
 
+const FormModal = ({ isModalOpen, closeModal, openModal }) => {
+  const [form, setForm] = useState({})
+  const showModal = () => {
+    openModal()
+  }
+  const handleCancel = () => {
+    closeModal()
+  }
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setForm({ ...form, [name]: value })
+  }
+  const sendEmail = (e) => {
+    console.log('🚀form---->', form);
+    e.preventDefault()
+    emailjs
+      .send(
+        "service_cjgi78l",
+        "template_7d50vuu",
+        form,
+        // {
+        //   from_name: "test",
+        //   to_email: "thaibathanh0610@gmail.com",
+        //   to_name: "alan12",
+        //   phone: "1234567890",
+        //   message: "message1234",
+        // },
+        {
+          publicKey: "wt7XnhfL1hnyE-WgH",
+        }
+      )
+      .then(
+        () => {
+          console.log("SUCCESS!")
+        },
+        (error) => {
+          console.log("FAILED...", error)
+        }
+      )
+  }
+
+  return (
+    <Modal
+      open={isModalOpen}
+      onCancel={handleCancel}
+      footer={false}
+    >
+      {" "}
+      <div className="flex flex-col gap-5 px-10 py-10 rounded-[20px] relative ">
+        {" "}
+        <div className="absolute top-0 left-0 stripesModal w-full h-[40px] rounded-[20px_20px_0_0]"></div>
+        <div className="absolute bottom-[0%] left-0 stripesModal w-full h-[40px] "></div>
+        <h2 className="text-[40px] font-extrabold text-[#fff] ">CONTACT US</h2>
+        <form className="w-full">
+          <input
+            onChange={handleChange}
+            name="to_name"
+            className="text-[18px] rounded-[10px] glass py-2 px-4 text-[#fff] border border-[#fff] w-full my-2 "
+            type="text"
+            placeholder="Your Name"
+          />
+          <input
+            onChange={handleChange}
+            name="to_email"
+            className="text-[18px] rounded-[10px] glass py-2 px-4 text-[#fff] border border-[#fff] w-full my-2 "
+            type="text"
+            placeholder="Email"
+          />
+          <input
+            onChange={handleChange}
+            name="phone"
+            className="text-[18px] rounded-[10px] glass py-2 px-4 text-[#fff] border border-[#fff] w-full my-2 "
+            type="tel"
+            placeholder="Phone Number"
+          />
+          <textarea
+            onChange={handleChange}
+            name="message"
+            className="text-[18px] rounded-[10px] glass py-2 px-4 text-[#fff] border border-[#fff] w-full my-2 "
+            type="text"
+            rows={5}
+            placeholder="Message"
+          />
+        </form>
+        <div className="flex justify-end pb-5 ">
+          <button
+            onClick={sendEmail}
+            className="text-[26px]  text-[#fff] w-max font-medium p-[8px_20px] rounded-[10px] cursor-pointer bg-gradient-to-b from-[#A04AF5] to-[#430E56] hover:scale-105 transition-all duration-200 ease "
+          >
+            SEND NOW
+          </button>
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { width } = useWindowSize()
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
   }
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
+      <FormModal
+        isModalOpen={isModalOpen}
+        openModal={openModal}
+        closeModal={closeModal}
+      />
       <div className="h-[80vh] fixed top-[13%] right-[5%] flex justify-between items-end flex-col z-[99] ">
         <div className=" flex items-center flex-col gap-y-4 ">
           <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
             <img
-              className="-skew-x-[8deg] w-[58px] aspect-[1] "
+              className="-skew-x-[8deg] w-[56px] aspect-[1] xs:w-[30px] sm:w-[35px] md:w-[40px] "
               src="/images/X.svg"
               alt=""
             />
           </button>
           <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
             <img
-              className="-skew-x-[8deg] w-[58px] aspect-[1] "
+              className="-skew-x-[8deg] w-[56px] aspect-[1] xs:w-[30px] sm:w-[35px] md:w-[40px] "
               src="/images/telegram.svg"
               alt=""
             />
@@ -210,18 +359,19 @@ function App() {
           className="rounded-full bg-gradient-to-b from-[#752292] to-[#B978D0]   transition-all duration-300 hover:translate-y-[-2px]  hover:shadow-[0px_6px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:shadow-none"
         >
           <img
+            className={`${width < 700 && "w-[60px]"}`}
             src="/images/Group 136.png"
             alt=""
           />
         </button>
       </div>
-      <Header />
+      <Header openModal={openModal} />
       <main>
-        <Banner />
+        <Banner openModal={openModal} />
         <Market />
         <Solutions />
         <section
-          className={`  overflow-hidden object-contain bg-[right_top_1rem] pb-[150px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
+          className={`  overflow-hidden object-contain bg-[right_top_1rem] pb-[110px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
         >
           <div className=" flexCenter overflow-hidden  relative w-screen stripes ">
             <div className=" container mx-0 bg-gradient-to-t bgGradient w-full block skew-x-[40deg]   ">
@@ -231,15 +381,15 @@ function App() {
             </div>
           </div>
 
-          <div className="container my-[50px] flex justify-around ">
-            <div className="max-w-[45%]">
+          <div className="container my-[50px] flex justify-around xs:flex-col sm:flex-col md:flex-col lg:flex-col md:max-w-full xl:max-w-full 2xl:max-w-full ">
+            <div className={`" max-w-[45%] px-3 ${width < 990 && "max-w-full"} "`}>
               <Reveal>
                 <div className="  bg-gradient-to-t bgGradient w-full block -skew-x-[40deg]  rounded-[12px] my-5  ">
                   <h2 className="text-[28px] font-bold text-center  py-4 skew-x-[40deg]">
                     Fractional CMO
                   </h2>
                 </div>
-                <div className="flex items-center gap-x-6 ">
+                <div className="flex items-center gap-x-6 xs:flex-col xs:gap-y-5 sm:flex-col sm:gap-y-5 ">
                   <img
                     src="/images/Ellipse 11.png"
                     alt=""
@@ -249,7 +399,7 @@ function App() {
                     CMO
                   </p>
                 </div>
-                <div className="flex items-center gap-x-6 my-7 ">
+                <div className="flex items-center gap-x-6 xs:flex-col xs:gap-y-5 sm:flex-col sm:gap-y-5 my-7 ">
                   <img
                     src="/images/Ellipse 12.png"
                     alt=""
@@ -259,7 +409,7 @@ function App() {
                     OKRs
                   </p>
                 </div>
-                <div className="flex items-center gap-x-6 ">
+                <div className="flex items-center gap-x-6 xs:flex-col xs:gap-y-5 sm:flex-col sm:gap-y-5 ">
                   <img
                     src="/images/Ellipse 13.png"
                     alt=""
@@ -271,14 +421,14 @@ function App() {
                 </div>
               </Reveal>
             </div>
-            <div className="max-w-[45%]">
+            <div className={`" max-w-[45%] px-3 ${width < 990 && "max-w-full"} "`}>
               <Reveal>
                 <div className="  bg-gradient-to-t bgGradient w-full  -skew-x-[40deg]  rounded-[12px] my-5  ">
                   <h2 className="text-[28px] font-bold text-center  py-4 skew-x-[40deg]">
                     Advisory
                   </h2>
                 </div>
-                <div className="flex items-center gap-x-6 ">
+                <div className="flex items-center gap-x-6 xs:flex-col xs:gap-y-5 sm:flex-col sm:gap-y-5 ">
                   <img
                     src="/images/Ellipse 14.png"
                     alt=""
@@ -288,7 +438,7 @@ function App() {
                     dedicated communication channel and async review of key docs
                   </p>
                 </div>
-                <div className="flex items-center gap-x-6 my-7 ">
+                <div className="flex items-center gap-x-6 xs:flex-col xs:gap-y-5 sm:flex-col sm:gap-y-5 my-7 ">
                   <img
                     src="/images/Ellipse 15.png"
                     alt=""
@@ -298,7 +448,7 @@ function App() {
                     conferences to get you connected to the right people
                   </p>
                 </div>
-                <div className="flex items-center gap-x-6 ">
+                <div className="flex items-center gap-x-6 xs:flex-col xs:gap-y-5 sm:flex-col sm:gap-y-5 ">
                   <img
                     src="/images/Ellipse 16.png"
                     alt=""
@@ -314,7 +464,7 @@ function App() {
         </section>
         {/* THE FRACTIONAL CMO    */}
         <section
-          className={`overflow-hidden object-contain bg-[right_top_1rem] pb-[150px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
+          className={`overflow-hidden object-contain bg-[right_top_1rem] pb-[130px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
         >
           <div className=" flexCenter overflow-hidden  relative w-screen stripes ">
             <div className=" container mx-0 bg-gradient-to-t bgGradient w-full block skew-x-[40deg]   ">
@@ -323,8 +473,12 @@ function App() {
               </h2>
             </div>
           </div>
-          <div className="container my-[50px] flex justify-between ">
-            <div className=" max-w-[20%] ">
+          <div
+            className={`" px-7 my-[50px] flex justify-center gap-x-8 flex-wrap ${width > 1300 && "flex-nowrap"
+              } ${width < 1300 && width > 800 && "grid grid-cols-2 items-start"} ${width < 1300 && "flex-col gap-8 items-start"
+              } "`}
+          >
+            <div className=" max-w-[20%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full xl:max-w-full 2xl:max-w-full  ">
               <Reveal>
                 <div className="  bg-gradient-to-t bgGradient text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
                   <h2 className="text-[30px] font-bold  skew-x-[15deg]">
@@ -345,13 +499,13 @@ function App() {
               </Reveal>
             </div>
             <img
-              className=" mt-10 h-[32px]"
+              className={`" mt-10 h-[32px] ${width < 1300 && "hidden"} "`}
               src="/images/Group 118.png"
               alt=""
             />
-            <div className=" max-w-[20%] ">
+            <div className=" max-w-[20%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full xl:max-w-full 2xl:max-w-full ">
               <Reveal>
-                <div className="  bg-gradient-to-t bgGradient text-center w-full px-7 py-10 -skew-x-[15deg] rounded-[12px]  ">
+                <div className="  bg-gradient-to-t bgGradient text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
                   <h2 className="text-[30px] font-bold  skew-x-[15deg]">
                     Reset Goals
                   </h2>
@@ -370,11 +524,11 @@ function App() {
               </Reveal>
             </div>
             <img
-              className=" mt-10 h-[32px]"
+              className={`" mt-10 h-[32px] ${width < 1300 && "hidden"} "`}
               src="/images/Group 118.png"
               alt=""
             />
-            <div className=" max-w-[20%] ">
+            <div className=" max-w-[20%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full xl:max-w-full 2xl:max-w-full ">
               <Reveal>
                 <div className="  bg-gradient-to-t bgGradient text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
                   <h2 className="text-[30px] font-bold  skew-x-[15deg]">
@@ -395,14 +549,14 @@ function App() {
               </Reveal>
             </div>
             <img
-              className=" mt-10 h-[32px]"
+              className={`" mt-10 h-[32px] ${width < 1300 && "hidden"} "`}
               src="/images/Group 118.png"
               alt=""
             />
 
-            <div className=" max-w-[20%] ">
+            <div className=" max-w-[20%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full xl:max-w-full 2xl:max-w-full ">
               <Reveal>
-                <div className="  bg-gradient-to-t bgGradient text-center w-full px-7 py-10 -skew-x-[15deg] rounded-[12px]  ">
+                <div className="  bg-gradient-to-t bgGradient text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
                   <h2 className="text-[30px] font-bold  skew-x-[15deg]">
                     Stay the Course
                   </h2>
@@ -425,7 +579,7 @@ function App() {
         </section>
         {/* Advisor */}
         <section
-          className={`overflow-hidden object-contain bg-[right_top_1rem] pb-[150px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
+          className={`overflow-hidden object-contain bg-[right_top_1rem] pb-[130px] bg-auto bg-no-repeat ${`bg-[url("/images/bar-cyber.png")]`} `}
         >
           <div className=" flexCenter overflow-hidden  relative w-screen stripes ">
             <div className=" container mx-0 bg-gradient-to-t bgGradient w-full block skew-x-[40deg]   ">
@@ -435,11 +589,16 @@ function App() {
             </div>
           </div>
 
-          <div className="container my-[80px] flex justify-evenly ">
-            <div className=" max-w-[30%] ">
+          <div
+            className={`"  my-[80px] flex justify-evenly flex-wrap gap-10 ${width < 900 && "flex-col px-5 items-center"
+              } "`}
+          >
+            <div className=" max-w-[30%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-[50%] xl:max-w-[75%] ">
               <Reveal>
-                <div className="   bg-gradient-to-t bgGradient text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
-                  <h2 className="text-[30px] font-bold  skew-x-[15deg]">BRAIN</h2>
+                <div className="   bg-gradient-to-t bgGradient xs:py-3 sm:py-4 text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
+                  <h2 className="text-[30px] font-bold   skew-x-[15deg]">
+                    BRAIN
+                  </h2>
                 </div>
                 <ul className="list-disc list-inside ml-5 -mt-5 pl-2 pt-6 border-l-8 border-l-[#7E34BC] border-solid ">
                   <li className="text-[18px] my-3 ">Regular Calls</li>
@@ -453,10 +612,10 @@ function App() {
               </Reveal>
             </div>
 
-            <div className=" max-w-[30%] ">
+            <div className=" max-w-[30%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-[50%] xl:max-w-[75%] ">
               <Reveal>
-                <div className="  bg-gradient-to-t bgGradient text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
-                  <h2 className="text-[30px] font-bold  skew-x-[15deg]">
+                <div className="  bg-gradient-to-t bgGradient xs:py-3 sm:py-4 text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
+                  <h2 className="text-[30px] font-bold   skew-x-[15deg]">
                     NETWORK
                   </h2>
                 </div>
@@ -469,10 +628,10 @@ function App() {
                 </ul>
               </Reveal>
             </div>
-            <div className=" max-w-[30%] ">
+            <div className=" max-w-[30%] xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-[50%] xl:max-w-[75%] ">
               <Reveal>
-                <div className="  bg-gradient-to-t bgGradient text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
-                  <h2 className="text-[30px] font-bold  skew-x-[15deg]">
+                <div className="  bg-gradient-to-t bgGradient xs:py-3 sm:py-4 text-center w-full px-7 py-5 -skew-x-[15deg] rounded-[12px]  ">
+                  <h2 className="text-[30px] font-bold   skew-x-[15deg]">
                     LIFETIME SUPPORT
                   </h2>
                 </div>
@@ -492,14 +651,16 @@ function App() {
         >
           <div className=" flexCenter overflow-hidden  relative w-screen stripes ">
             <div className=" container mx-0 bg-gradient-to-t bgGradient w-full block skew-x-[40deg]   ">
-              <h2 className="text-[36px] font-extrabold pl-10 pt-3 pb-1 -skew-x-[40deg]">
+              <h2 className="text-[36px] font-extrabold pl-10 pt-3 pb-1 -skew-x-[40deg] xs:pl-5 xs:text-[30px] ">
                 SAMPLE TIMELINE
               </h2>
             </div>
           </div>
 
           <div className="container text-[34px] text-center my-8 ">
-            <h3>Optimization, Performance Tracking & Reporting</h3>
+            <h3 className=" xs:text-left sm:text-left md:text-left ">
+              Optimization, Performance Tracking & Reporting
+            </h3>
             <Reveal delay={0.5}>
               <Carousel
                 draggable={true}
@@ -507,30 +668,35 @@ function App() {
               >
                 <div>
                   <div>
-                    <h4 className="text-[60px] text-[#F19BFF] font-extrabold flex items-center gap-x-10 pl-[120px] ">
+                    <h4 className="text-[60px] text-[#F19BFF] font-extrabold flex items-center gap-x-10 pl-[120px] xs:pl-2 xs:text-[42px] sm:pl-3 md:pl-0 md:block lg:block lg:pl-0 xl:pl-10 ">
                       WEEK 1-2
                       <img
-                        className="max-w-[70%] w-full h-[25px]"
+                        className={`" max-w-[70%]  h-[25px] xl:max-w-[60%] 2xl:max-w-[60%] ${width < 1000 ? "w-0" : "w-full"
+                          } "`}
                         src="/images/Line 25.png"
                         alt=""
                       />
                     </h4>
-                    <div className="flex items-center gap-x-10 bg-gradient-to-tl from-[#000000] to-[#4A0D7A] rounded-[20px_0_0_20px] ">
+                    <div
+                      className={`" flex items-center gap-x-10 bg-gradient-to-tl from-[#000000] to-[#4A0D7A] rounded-[20px_0_0_20px] ${width < 990 &&
+                        "flex-col justify-center gap-y-10 pt-4 rounded-[20px] max-w-full "
+                        } "`}
+                    >
                       <img
-                        className="rounded-[20px_0_0_20px]"
+                        className="rounded-[20px_0_0_20px] xs:max-w-[80%] xs:rounded-[20px] sm:max-w-[80%] sm:rounded-[20px] md:max-w-[90%] "
                         src="/images/Rectangle 42.png"
                         alt=""
                       />
-                      <div className="text-left">
-                        <ul className="list-disc list-inside text-[#4AE1F6] text-[36px] ">
+                      <div className="text-left px-5 pb-7 ">
+                        <ul className="list-disc list-inside text-[#4AE1F6] text-[36px] xs:text-[28px] ">
                           Strategy Development & Planning Deliverables
-                          <li className="text-white text-[24px] mt-4 ">
+                          <li className="text-white text-[24px] xs:text-[20px] mt-4 ">
                             GTM Plan and Framework
                           </li>
-                          <li className="text-white text-[24px] ">
+                          <li className="text-white text-[24px] xs:text-[20px] ">
                             Resource & Budget Requirements
                           </li>
-                          <li className="text-white text-[24px] ">
+                          <li className="text-white text-[24px] xs:text-[20px] ">
                             Identify Potential Pitfalls
                           </li>
                         </ul>
@@ -539,31 +705,36 @@ function App() {
                   </div>
                 </div>
                 <div>
-                  <div>
-                    <h4 className="text-[60px] text-[#9BDBFF] font-extrabold flex items-center gap-x-10 pl-[120px] ">
+                  <div className="mx-4">
+                    <h4 className="text-[60px] text-[#9BDBFF] font-extrabold flex items-center gap-x-10 pl-[120px] xs:pl-2 xs:text-[42px] sm:pl-3 md:pl-0 md:block lg:block lg:pl-0 xl:pl-10 ">
                       WEEK 3-4
                       <img
-                        className="max-w-[70%] w-full h-[25px]"
+                        className={`" max-w-[70% h-[25px] xl:max-w-[60%] 2xl:max-w-[60%] ${width < 1000 ? "w-0" : "w-full"
+                          } "`}
                         src="/images/Line 25.png"
                         alt=""
                       />
                     </h4>
-                    <div className="flex items-center gap-x-10 bg-gradient-to-tl from-[#000000] to-[#4A0D7A] rounded-[20px_0_0_20px] ">
+                    <div
+                      className={`" flex items-center gap-x-10 bg-gradient-to-tl from-[#000000] to-[#4A0D7A] rounded-[20px_0_0_20px] ${width < 990 &&
+                        "flex-col justify-center gap-y-10 pt-4 rounded-[20px] "
+                        } "`}
+                    >
                       <img
-                        className="rounded-[20px_0_0_20px]"
-                        src="/images/week3.png"
+                        className="rounded-[20px_0_0_20px] xs:max-w-[80%] xs:rounded-[20px] sm:max-w-[80%] sm:rounded-[20px] "
+                        src="/images/Rectangle 42.png"
                         alt=""
                       />
-                      <div className="text-left">
-                        <ul className="list-disc list-inside text-[#4AE1F6] text-[36px] ">
+                      <div className="text-left px-5 pb-7 ">
+                        <ul className="list-disc list-inside text-[#4AE1F6] text-[36px] xs:text-[28px] ">
                           Vendor Evaluation & Selection
-                          <li className="text-white text-[24px] mt-4 ">
+                          <li className="text-white text-[24px] xs:text-[20px] mt-4 ">
                             Resources Requirements Aligned
                           </li>
-                          <li className="text-white text-[24px] ">
+                          <li className="text-white text-[24px] xs:text-[20px] ">
                             Creative Pipeline Established
                           </li>
-                          <li className="text-white text-[24px] ">
+                          <li className="text-white text-[24px] xs:text-[20px] ">
                             Existing Resource Audit Complered
                           </li>
                         </ul>
@@ -573,26 +744,30 @@ function App() {
                 </div>
                 <div>
                   <div>
-                    <h4 className="text-[60px] text-[#9BFFD5] font-extrabold text-center ">
+                    <h4 className="text-[60px] text-[#9BDBFF] font-extrabold text-center mb-2 xs:text-[42px]  ">
                       MONTHS 2-3
                     </h4>
-                    <div className="flex items-center gap-x-10 bg-gradient-to-tl from-[#000000] to-[#4A0D7A] rounded-[20px_0_0_20px] ">
+                    <div
+                      className={`" flex items-center gap-x-10 bg-gradient-to-tl from-[#000000] to-[#4A0D7A] rounded-[20px_0_0_20px] ${width < 990 &&
+                        "flex-col justify-center gap-y-10 pt-4 rounded-[20px] "
+                        } "`}
+                    >
                       <img
-                        className="rounded-[20px_0_0_20px]"
-                        src="/images/week4.png"
+                        className="rounded-[20px_0_0_20px] xs:max-w-[80%] xs:rounded-[20px] sm:max-w-[80%] sm:rounded-[20px] "
+                        src="/images/Rectangle 42.png"
                         alt=""
                       />
-                      <div className="text-left">
-                        <ul className="list-disc list-inside text-[#4AE1F6] text-[36px] ">
+                      <div className="text-left px-5 pb-7 ">
+                        <ul className="list-disc list-inside text-[#4AE1F6] text-[36px] xs:text-[28px] ">
                           Campaign Setup, Influencer Recruitment &
                           Community Building
-                          <li className="text-white text-[24px] mt-4 ">
+                          <li className="text-white text-[24px] xs:text-[20px] mt-4 ">
                             Core team process established
                           </li>
-                          <li className="text-white text-[24px] ">
+                          <li className="text-white text-[24px] xs:text-[20px] ">
                             Implementation of GTM
                           </li>
-                          <li className="text-white text-[24px] ">
+                          <li className="text-white text-[24px] xs:text-[20px] ">
                             Completion of team and GC transitions out
                           </li>
                         </ul>
@@ -615,8 +790,11 @@ function App() {
             </div>
           </div>
 
-          <div className="container mt-[80px] flex justify-around ">
-            <div className="max-w-[45%]">
+          <div
+            className={`" container mt-[80px] flex justify-around gap-y-9  ${width < 1200 && "flex-col items-center"
+              } ${width < 600 && "max-w-full"} "`}
+          >
+            <div className={`" max-w-[45%] ${width < 1200 && "max-w-full"} "`}>
               <Reveal>
                 <div className="flex items-center gap-x-3 ">
                   <h3 className="text-[40px] font-extrabold text-[#BF4AF6]">
@@ -647,12 +825,15 @@ function App() {
                 </p>
               </Reveal>
             </div>
-            <div className="max-w-[45%]   ">
+            <div
+              className={`" max-w-[45%]  ${width < 1200 && width > 600 && "max-w-full"
+                } ${width < 600 && "max-w-full overflow-hidden "} "`}
+            >
               <Reveal>
-                <div className="flex bg-[#752EAC] h-max rounded-[30px]">
+                <div className="flex bg-[#752EAC] h-max w-max rounded-[30px]">
                   <video
                     className="border-[16px] border-[#752EAC] rounded-[30px_0_0_30px] max-h-[420px] "
-                    width="420"
+                    width={width < 600 ? "320" : "420"}
                     height="420"
                     autoPlay
                     muted
@@ -689,109 +870,133 @@ function App() {
             </div>
           </div>
 
-          <div className=" mt-[80px] px-5 flex justify-around items-center ">
-            <div className=" max-w-[18%]">
-              <img
-                // className="-skew-x-[10deg]"
-                src="/images/Rectangle 29.jpg"
-                alt=""
-              />
-            </div>
+          <div className=" mt-[80px] px-5 flex justify-around items-center flex-wrap gap-y-8 xs:flex-col sm:flex-col md:flex-col ">
+            <img
+              className=" max-w-[18%] xs:max-w-full sm:max-w-full md:max-w-[70%] lg:max-w-[30%] xl:max-w-[30%] 2xl:max-w-[30%] "
+              src="/images/Rectangle 29.jpg"
+              alt=""
+            />
 
             <img
-              className="max-w-[18%]"
+              className="max-w-[18%] xs:max-w-full sm:max-w-full md:max-w-[70%] lg:max-w-[30%] xl:max-w-[30%] 2xl:max-w-[30%] "
               src="/images/Group 51.jpg"
               alt=""
             />
             <img
-              className="max-w-[18%]"
+              className="max-w-[18%] xs:max-w-full sm:max-w-full md:max-w-[70%] lg:max-w-[30%] xl:max-w-[30%] 2xl:max-w-[30%] "
               src="/images/Group 52.jpg"
               alt=""
             />
             <img
-              className="max-w-[18%]"
+              className="max-w-[18%] xs:max-w-full sm:max-w-full md:max-w-[70%] lg:max-w-[30%] xl:max-w-[30%] 2xl:max-w-[30%] "
               src="/images/Group 47.jpg"
               alt=""
             />
             <img
-              className="max-w-[18%]"
+              className="max-w-[18%] xs:max-w-full sm:max-w-full md:max-w-[70%] lg:max-w-[30%] xl:max-w-[30%] 2xl:max-w-[30%] "
               src="/images/Group 49.jpg"
               alt=""
             />
           </div>
         </section>
-        <section className="container flex justify-around items-center pb-[120px] ">
-          <div className="max-w-[38%] flex justify-center items-center flex-col gap-y-3 ">
-            <img
-              src="/images/TonyValcarcel.png"
-              alt=""
-            />
-            <div className="  bg-gradient-to-t bgGradient w-full text-center skew-x-[40deg] rounded-[12px]   ">
-              <h2 className="text-[42px] font-extrabold  -skew-x-[40deg]">
-                TONY VALCARCEL
-              </h2>
-            </div>
-            <p className="text-[34px]">Founder of GlitterCloud</p>
-          </div>
-          <div className="max-w-[55%]">
-            <div className="border-b border-[#fff] border-solid pb-8 mb-8 ">
-              <div className="  bg-gradient-to-t bgGradient w-max text-center skew-x-[40deg] rounded-[12px]   ">
-                <h2 className="text-[28px] px-10 py-1 font-semibold  -skew-x-[40deg]">
-                  OUR EXPERIENCE
+        <section
+          className={`" container flex justify-around items-center gap-x-20 pb-[120px] ${width < 1070 ? "flex-col gap-y-10 " : ""
+            } "`}
+        >
+          <div
+            className={`" xl:max-w-[41%] flex justify-center items-center flex-col gap-y-3 lg:max-w-[60%] ${width < 770 ? "max-w-full " : ""
+              } "`}
+          >
+            <Reveal>
+              <img
+                src="/images/TonyValcarcel.png"
+                alt=""
+              />
+              <div className="  bg-gradient-to-t bgGradient w-full text-center skew-x-[40deg] rounded-[12px]   ">
+                <h2 className="text-[42px] font-extrabold  -skew-x-[40deg] xs:text-[32px] sm:text-[32px] xl:text-[36px] ">
+                  TONY VALCARCEL
                 </h2>
               </div>
-              <div className="flex justify-around items-center gap-5 flex-wrap mt-4 ">
-                <img
-                  src="/images/Amazon_logo.svg"
-                  alt=""
-                />
-                <img
-                  src="/images/Twitch-logo.svg"
-                  alt=""
-                />
-                <img
-                  src="/images/Nintendo_logo.svg"
-                  alt=""
-                />
-                <img
-                  src="/images/ea-sport-logo.svg"
-                  alt=""
-                />
-                <img
-                  src="/images/Group 17.svg"
-                  alt=""
-                />
-              </div>
+              <p className="text-[34px] text-center mt-3 xs:text-[28px] xl:text-[30px] ">
+                Founder of GlitterCloud
+              </p>
+            </Reveal>
+          </div>
+          <div className={`" max-w-[55%] ${width < 1070 ? "max-w-full " : ""} "`}>
+            <div className="border-b border-[#fff] border-solid pb-8 mb-8 ">
+              <Reveal>
+                <div className="  bg-gradient-to-t bgGradient w-max text-center skew-x-[40deg] rounded-[12px]   ">
+                  <h2
+                    className={`" text-[28px] px-10 py-1 font-semibold  -skew-x-[40deg] ${width < 770 ? "mb-10 " : ""
+                      } "`}
+                  >
+                    OUR EXPERIENCE
+                  </h2>
+                </div>
+                <div className="flex justify-around items-center gap-6 flex-wrap mt-4 ">
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/Amazon_logo.svg"
+                    alt=""
+                  />
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/Twitch-logo.svg"
+                    alt=""
+                  />
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/Nintendo_logo.svg"
+                    alt=""
+                  />
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/ea-sport-logo.svg"
+                    alt=""
+                  />
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/Group 17.svg"
+                    alt=""
+                  />
+                </div>
+              </Reveal>
             </div>
             <div>
-              <div className="  bg-gradient-to-t bgGradient w-max text-center skew-x-[40deg] rounded-[12px]   ">
-                <h2 className="text-[28px] px-10 py-1 font-semibold  -skew-x-[40deg]">
-                  OUR CLIENTS
-                </h2>
-              </div>
-              <div className="flex justify-around items-center gap-4 flex-wrap mt-4 ">
-                <img
-                  src="/images/SPARKBALL_LOGO.svg"
-                  alt=""
-                />
-                <img
-                  src="/images/MACS.svg"
-                  alt=""
-                />
-                <img
-                  src="/images/Vector.svg"
-                  alt=""
-                />
-                <img
-                  src="/images/image 3.svg"
-                  alt=""
-                />
-              </div>
+              <Reveal>
+                <div className="  bg-gradient-to-t bgGradient w-max text-center skew-x-[40deg] rounded-[12px]   ">
+                  <h2 className="text-[28px] px-10 py-1 font-semibold  -skew-x-[40deg]">
+                    OUR CLIENTS
+                  </h2>
+                </div>
+                <div className="flex justify-around items-center gap-6 flex-wrap mt-4 ">
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/SPARKBALL_LOGO.svg"
+                    alt=""
+                  />
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/MACS.svg"
+                    alt=""
+                  />
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/Vector.svg"
+                    alt=""
+                  />
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    src="/images/image 3.svg"
+                    alt=""
+                  />
+                </div>
+              </Reveal>
             </div>
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer openModal={openModal} />
     </div>
   )
 }

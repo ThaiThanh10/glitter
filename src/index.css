@@ -85,38 +85,19 @@
   background: #a96ed8;
   opacity: 1;
 }
-.title-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background-color: #1d1d1d; /* Màu nền gần giống màu đen */
-  height: 80px; /* Chiều cao của thanh */
-  width: 100%;
-}
-
-.title-text {
-  color: white;
-  font-size: 18px;
-  font-family: "Arial", sans-serif;
-  background-color: #7c2ae8; /* Màu nền cho chữ */
-  padding: 10px 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  z-index: 1;
-  position: relative;
-}
 
 .stripes {
   background: repeating-linear-gradient(50deg, transparent, transparent 10px, #a04af6 18px, #430e56 40px);
 }
-
-.stripes-left {
-  left: 0;
-  clip-path: polygon(0 0, 100% 0, 70% 100%, 0% 100%); /* Tạo hình chéo bên trái */
+.stripesModal {
+  background: repeating-linear-gradient(50deg, transparent, transparent 10px, #a04af6 18px, #3e305e 40px);
 }
-
-.stripes-right {
-  right: 0;
-  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%); /* Tạo hình chéo bên phải */
+.ant-modal .ant-modal-content {
+  background: linear-gradient(#8757d6, #3d1c68);
+  border-radius: 20px;
+  border: 8px solid #aa93dc;
+  padding: 0;
+}
+textarea {
+  resize: none;
 }
