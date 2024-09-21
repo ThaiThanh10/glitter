@@ -113,7 +113,7 @@ export const Market = () => {
 }
 const Solutions = () => {
   const [current, setCurrent] = useState({
-    img: "/images/Rectangle 46.png",
+    img: "/images/Rectangle 49.png",
     desc: ["Planing for Success", "Token Launch Strategy", "Resource Planing"],
   })
   const { width } = useWindowSize()
@@ -121,7 +121,7 @@ const Solutions = () => {
     {
       btn: "Strategic Planing",
       data: {
-        img: "/images/Rectangle 46.png",
+        img: "/images/Rectangle 49.png",
         desc: ["Planing for Success", "Token Launch Strategy", "Resource Planing"],
       },
     },
@@ -185,9 +185,9 @@ const Solutions = () => {
               className={`" flexCenter gap-x-8 rounded-[22px]  bg-gradient-to-b from-[#655AAC] to-[#383066] p-5 -skew-x-[10deg] xs:skew-x-0 md:-skew-x-[6deg] lg:-skew-x-[7deg] sm:-skew-x-[4deg] ${width < 900 && " flex-col "
                 } "`}
             >
-              <div className="max-w-[30%] overflow-hidden w-[350px]  aspect-[0.6] bg-center bg-no-repeat rounded-[20px] xs:max-w-full sm:max-w-full md:max-w-[50%] lg:max-w-[50%]   ">
+              <div className="max-w-[30%] overflow-hidden w-[350px] grid place-items-center aspect-[0.6] bg-gradient-to-b from-[#4495AE] to-[#103D80] bg-center bg-no-repeat rounded-[20px] xs:max-w-full sm:max-w-full md:max-w-[50%] lg:max-w-[50%]   ">
                 <img
-                  className=" scale-[1] w-[350px] aspect-[0.6] rounded-[22px] "
+                  className="  skew-x-[10deg] "
                   src={current.img}
                   alt=""
                 />{" "}
@@ -201,7 +201,7 @@ const Solutions = () => {
                     key={i}
                     className=" text-center  bg-gradient-to-b from-[#444] to-[#222] w-full block -skew-x-[20deg]  rounded-[12px]   "
                   >
-                    <h2 className="text-[26px] font-extrabold  py-3 skew-x-[20deg]">
+                    <h2 className="text-[26px] font-extrabold  py-3 skew-x-[28deg]">
                       {item}
                     </h2>
                   </div>
@@ -709,7 +709,7 @@ function App() {
                     <h4 className="text-[60px] text-[#9BDBFF] font-extrabold flex items-center gap-x-10 pl-[120px] xs:pl-2 xs:text-[42px] sm:pl-3 md:pl-0 md:block lg:block lg:pl-0 xl:pl-10 ">
                       WEEK 3-4
                       <img
-                        className={`" max-w-[70% h-[25px] xl:max-w-[60%] 2xl:max-w-[60%] ${width < 1000 ? "w-0" : "w-full"
+                        className={`" max-w-[70% h-[25px] xl:max-w-[60%] 2xl:max-w-[60%] ${width < 1000 ? "w-0" : "w-[70%]"
                           } "`}
                         src="/images/Line 25.png"
                         alt=""
