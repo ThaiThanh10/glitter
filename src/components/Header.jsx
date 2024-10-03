@@ -23,7 +23,8 @@ const Header = ({ openModal }) => {
                     className={`text-[28px] font-medium p-[8px_20px] rounded-[10px] cursor-pointer ${width < 1100 ? "hidden" : ""
                         } "`}
                 >
-                    About Us
+                    <a target="_blank" href="/GlitterCloud Capabilities.pdf">About Us</a>
+
                 </li>
                 <li
                     onClick={openModal}

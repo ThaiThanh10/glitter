@@ -1,7 +1,7 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import "./App.css"
 import { Footer, Header, Reveal } from "./components"
-import { Carousel, Modal } from "antd"
+import { Carousel, Modal, notification } from "antd"
 import { useWindowSize } from "usehooks-ts"
 import emailjs from "@emailjs/browser"
 
@@ -97,16 +97,6 @@ export const Market = () => {
             ))}
           </div>
         </Reveal>
-        {/* <div className="flex justify-evenly items-center -mt-3 relative z-10 ">
-          <img
-            src="/images/Frame 3.png"
-            alt=""
-          />
-          <img
-            src="/images/Frame 3.png"
-            alt=""
-          />
-        </div> */}
       </div>
     </section>
   )
@@ -187,7 +177,7 @@ const Solutions = () => {
             >
               <div className="max-w-[30%] overflow-hidden w-[350px] grid place-items-center aspect-[0.6] bg-gradient-to-b from-[#4495AE] to-[#103D80] bg-center bg-no-repeat rounded-[20px] xs:max-w-full sm:max-w-full md:max-w-[50%] lg:max-w-[50%]   ">
                 <img
-                  className="  skew-x-[10deg] "
+                  className="  skew-x-[10deg] xs:skew-x-0 "
                   src={current.img}
                   alt=""
                 />{" "}
@@ -201,7 +191,7 @@ const Solutions = () => {
                     key={i}
                     className=" text-center  bg-gradient-to-b from-[#444] to-[#222] w-full block -skew-x-[20deg]  rounded-[12px]   "
                   >
-                    <h2 className="text-[26px] font-extrabold  py-3 skew-x-[28deg]">
+                    <h2 className="text-[26px] font-extrabold  py-3 skew-x-[28deg] xs:skew-x-[20deg]">
                       {item}
                     </h2>
                   </div>
@@ -216,7 +206,18 @@ const Solutions = () => {
 }
 
 const FormModal = ({ isModalOpen, closeModal, openModal }) => {
-  const [form, setForm] = useState({})
+  const [form, setForm] = useState({ to_email: "", to_name: "", phone: "", message: "" })
+  const [api, contextHolder] = notification.useNotification()
+  const openNotification = () => {
+    api.success({
+      message: `Your email has been successfully sent!`,
+      description:
+        "Thank you for reaching out to us! We have received your information and will get back to you as soon as possible. Have a great day!",
+      placement: "top",
+      showProgress: true,
+      pauseOnHover: false,
+    })
+  }
   const showModal = () => {
     openModal()
   }
@@ -229,27 +230,16 @@ const FormModal = ({ isModalOpen, closeModal, openModal }) => {
     setForm({ ...form, [name]: value })
   }
   const sendEmail = (e) => {
-    console.log('🚀form---->', form);
     e.preventDefault()
     emailjs
-      .send(
-        "service_cjgi78l",
-        "template_7d50vuu",
-        form,
-        // {
-        //   from_name: "test",
-        //   to_email: "thaibathanh0610@gmail.com",
-        //   to_name: "alan12",
-        //   phone: "1234567890",
-        //   message: "message1234",
-        // },
-        {
-          publicKey: "wt7XnhfL1hnyE-WgH",
-        }
-      )
+      .send("service_cjgi78l", "template_7d50vuu", form, {
+        publicKey: "wt7XnhfL1hnyE-WgH",
+      })
       .then(
         () => {
-          console.log("SUCCESS!")
+          handleCancel()
+          openNotification()
+          setForm({ to_email: "", to_name: "", phone: "", message: "" })
         },
         (error) => {
           console.log("FAILED...", error)
@@ -264,6 +254,7 @@ const FormModal = ({ isModalOpen, closeModal, openModal }) => {
       footer={false}
     >
       {" "}
+      {contextHolder}
       <div className="flex flex-col gap-5 px-10 py-10 rounded-[20px] relative ">
         {" "}
         <div className="absolute top-0 left-0 stripesModal w-full h-[40px] rounded-[20px_20px_0_0]"></div>
@@ -273,6 +264,7 @@ const FormModal = ({ isModalOpen, closeModal, openModal }) => {
           <input
             onChange={handleChange}
             name="to_name"
+            value={form.to_name}
             className="text-[18px] rounded-[10px] glass py-2 px-4 text-[#fff] border border-[#fff] w-full my-2 "
             type="text"
             placeholder="Your Name"
@@ -280,6 +272,7 @@ const FormModal = ({ isModalOpen, closeModal, openModal }) => {
           <input
             onChange={handleChange}
             name="to_email"
+            value={form.to_email}
             className="text-[18px] rounded-[10px] glass py-2 px-4 text-[#fff] border border-[#fff] w-full my-2 "
             type="text"
             placeholder="Email"
@@ -287,6 +280,7 @@ const FormModal = ({ isModalOpen, closeModal, openModal }) => {
           <input
             onChange={handleChange}
             name="phone"
+            value={form.phone}
             className="text-[18px] rounded-[10px] glass py-2 px-4 text-[#fff] border border-[#fff] w-full my-2 "
             type="tel"
             placeholder="Phone Number"
@@ -294,6 +288,7 @@ const FormModal = ({ isModalOpen, closeModal, openModal }) => {
           <textarea
             onChange={handleChange}
             name="message"
+            value={form.message}
             className="text-[18px] rounded-[10px] glass py-2 px-4 text-[#fff] border border-[#fff] w-full my-2 "
             type="text"
             rows={5}
@@ -340,18 +335,29 @@ function App() {
       <div className="h-[80vh] fixed top-[13%] right-[5%] flex justify-between items-end flex-col z-[99] ">
         <div className=" flex items-center flex-col gap-y-4 ">
           <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
-            <img
-              className="-skew-x-[8deg] w-[56px] aspect-[1] xs:w-[30px] sm:w-[35px] md:w-[40px] "
-              src="/images/X.svg"
-              alt=""
-            />
+            <a
+              target="_blank"
+              href="https://x.com/Tvalc"
+            >
+              {" "}
+              <img
+                className="-skew-x-[8deg] w-[56px] aspect-[1] xs:w-[30px] sm:w-[35px] md:w-[40px] "
+                src="/images/X.svg"
+                alt=""
+              />
+            </a>
           </button>
           <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
-            <img
-              className="-skew-x-[8deg] w-[56px] aspect-[1] xs:w-[30px] sm:w-[35px] md:w-[40px] "
-              src="/images/telegram.svg"
-              alt=""
-            />
+            <a
+              target="_blank"
+              href="https://t.me/vman1234"
+            >
+              <img
+                className="-skew-x-[8deg] w-[56px] aspect-[1] xs:w-[30px] sm:w-[35px] md:w-[40px] "
+                src="/images/telegram.svg"
+                alt=""
+              />
+            </a>
           </button>
         </div>
         <button

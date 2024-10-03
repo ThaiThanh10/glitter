@@ -28,31 +28,53 @@ const Footer = ({ openModal }) => {
                             <li>Join the GlitterCloud Family</li>
                         </ul>
                     </ul>
-                    <p className={`${width < 970 ? "text-center " : ""}`} >© 2024 GlitterCloud. All rights Reserved.</p>
+                    <p className={`${width < 970 ? "text-center " : ""}`}>
+                        © 2024 GlitterCloud. All rights Reserved.
+                    </p>
                 </div>
-                <div className={` max-w-[40%] w-[80%] flex justify-center items-center flex-col ${width < 960 ? "max-w-full " : ""} "`}>
+                <div
+                    className={` max-w-[40%] w-[80%] flex justify-center items-center flex-col ${width < 960 ? "max-w-full " : ""
+                        } "`}
+                >
                     <h2
                         className={`text-[44px] font-black text-center ${width < 960 ? " mt-10 " : ""
                             } "`}
                     >
                         CONTACT US
                     </h2>
-                    <div className={`" mt-[20px] mb-[52px] flex items-center gap-x-4 justify-center ${width < 970 ? "mb-0 " : ""} "`}>
+                    <div
+                        className={`" mt-[20px] mb-[52px] flex items-center gap-x-4 justify-center ${width < 970 ? "mb-0 " : ""
+                            } "`}
+                    >
                         <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
-                            <img
-                                className="-skew-x-[8deg] w-[58px] aspect-[1] "
-                                src="/images/X.svg"
-                                alt=""
-                            />
+                            <a
+                                target="_blank"
+                                href="https://x.com/Tvalc"
+                            >
+                                {" "}
+                                <img
+                                    className="-skew-x-[8deg] w-[58px] aspect-[1] "
+                                    src="/images/X.svg"
+                                    alt=""
+                                />
+                            </a>
                         </button>
                         <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
-                            <img
-                                className="-skew-x-[8deg] w-[58px] aspect-[1] "
-                                src="/images/telegram.svg"
-                                alt=""
-                            />
+                            <a
+                                target="_blank"
+                                href="https://t.me/vman1234"
+                            >
+                                <img
+                                    className="-skew-x-[8deg] w-[58px] aspect-[1] "
+                                    src="/images/telegram.svg"
+                                    alt=""
+                                />
+                            </a>
                         </button>
-                        <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
+                        <button
+                            onClick={openModal}
+                            className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none"
+                        >
                             <img
                                 className="-skew-x-[8deg] w-[58px] aspect-[1] "
                                 src="/images/mail.svg"
@@ -60,14 +82,20 @@ const Footer = ({ openModal }) => {
                             />
                         </button>
                         <button className="rounded-2xl skew-x-[8deg] bg-gradient-to-b from-[#752292] to-[#B978D0]  px-3 py-2 transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
-                            <img
-                                className="-skew-x-[8deg] w-[58px] aspect-[1] "
-                                src="/images/phone.svg"
-                                alt=""
-                            />
+                            <a href="tel:+19415186945">
+                                {" "}
+                                <img
+                                    className="-skew-x-[8deg] w-[58px] aspect-[1] "
+                                    src="/images/phone.svg"
+                                    alt=""
+                                />{" "}
+                            </a>
                         </button>
                     </div>
-                    <div className={`" w-[80%] grid place-items-center relative  lg:w-[100%] xl:w-full  ${width < 970 ? "hidden " : ""} "`}>
+                    <div
+                        className={`" w-[80%] grid place-items-center relative  lg:w-[100%] xl:w-full  ${width < 970 ? "hidden " : ""
+                            } "`}
+                    >
                         {" "}
                         <input
                             className="text-[20px] rounded-[10px] glass py-[25px] pl-9 text-[#fff] w-full mt-4   "
