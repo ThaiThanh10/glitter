@@ -232,8 +232,8 @@ const FormModal = ({ isModalOpen, closeModal, openModal }) => {
   const sendEmail = (e) => {
     e.preventDefault()
     emailjs
-      .send("service_cjgi78l", "template_7d50vuu", form, {
-        publicKey: "wt7XnhfL1hnyE-WgH",
+      .send("service_tbtu6gz", "template_px3v1v9", form, {
+        publicKey: "_0vDoYIcXTuDIU7TW",
       })
       .then(
         () => {
