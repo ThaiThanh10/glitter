@@ -89,7 +89,7 @@ export const Market = () => {
                   <h4 className="text-[24px] font-extrabold   ml-[17%] xs:ml-[32%] mb-2 max-w-[210px] -skew-x-[10deg] xs:-skew-x-[0deg] ">
                     {item.title}
                   </h4>
-                  <p className="text-[20px] max-w-[270px] ml-[7%] -skew-x-[10deg] xs:-skew-x-[0deg] ">
+                  <p className="text-[20px] max-w-[270px] min-h-[150px] ml-[7%] -skew-x-[10deg] xs:-skew-x-[0deg] ">
                     {item.text}
                   </p>
                 </div>
@@ -104,7 +104,7 @@ export const Market = () => {
 const Solutions = () => {
   const [current, setCurrent] = useState({
     img: "/images/Rectangle 49.png",
-    desc: ["Planing for Success", "Token Launch Strategy", "Resource Planing"],
+    desc: ["Planning for Success", "Token Launch Strategy", "Resource Planing"],
   })
   const { width } = useWindowSize()
   const data = [
@@ -900,7 +900,7 @@ function App() {
             />
             <img
               className="max-w-[18%] xs:max-w-full sm:max-w-full md:max-w-[70%] lg:max-w-[30%] xl:max-w-[30%] 2xl:max-w-[30%] "
-              src="/images/Group 49.jpg"
+              src="/images/Group 148.jpg"
               alt=""
             />
           </div>
@@ -977,23 +977,29 @@ function App() {
                 </div>
                 <div className="flex justify-around items-center gap-6 flex-wrap mt-4 ">
                   <img
-                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
-                    src="/images/SPARKBALL_LOGO.svg"
+                    className="xl:max-w-[30%] 2xl:max-w-[30%] max-w-[34%] "
+                    src="/images/SPARKBALL.png"
                     alt=""
                   />
                   <img
-                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
-                    src="/images/MACS.svg"
-                    alt=""
-                  />
-                  <img
-                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
+                    className="xl:max-w-[30%] 2xl:max-w-[30%] max-w-[34%] "
                     src="/images/Vector.svg"
                     alt=""
                   />
                   <img
-                    className="xl:max-w-[30%] 2xl:max-w-[37%] "
-                    src="/images/image 3.svg"
+                    className="xl:max-w-[30%] 2xl:max-w-[30%] max-w-[27%] "
+                    src="/images/nway.png"
+                    alt=""
+                  />
+
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[30%] max-w-[27%] "
+                    src="/images/warped.png"
+                    alt=""
+                  />
+                  <img
+                    className="xl:max-w-[30%] 2xl:max-w-[30%] max-w-[27%] "
+                    src="/images/sff.png"
                     alt=""
                   />
                 </div>
