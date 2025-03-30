@@ -7,12 +7,11 @@ export default {
             center: true,
             width: "100%",
             screens: {
-                xs: "400px",
-                sm: "600px",
-                md: "728px",
-                lg: "984px",
-                xl: "1240px",
-                "2xl": "1440px",
+                xs: "480px",
+                sm: "768px",
+                lg: "1024px",
+                xl: "1280px",
+                "2xl": "1536px",
             },
         },
         fontFamily: {
@@ -20,15 +19,11 @@ export default {
         },
         screens: {
             xs: { min: "200px", max: "480px" },
-            sm: { min: "481px", max: "576px" },
+            sm: { min: "481px", max: "768px" },
 
-            md: { min: "577px", max: "768px" },
+            lg: { min: "769px", max: "1024px" },
 
-            lg: { min: "769px", max: "992px" },
-
-            xl: { min: "993px", max: "1200px" },
-
-            "2xl": { min: "1201px", max: "1440px" },
+            xl: { min: "1024px", max: "1440px" },
         },
 
         extend: {},

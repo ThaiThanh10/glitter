@@ -19,6 +19,10 @@
 .oxanium {
   font-family: "Oxanium", system-ui;
 }
+
+main {
+  font-family: "Oxanium", system-ui;
+}
 @layer components {
   .bgGradient {
     @apply bg-gradient-to-b from-[#A04AF5] to-[#430E56];
